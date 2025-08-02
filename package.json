@@ -1,0 +1,14 @@
+{
+  "name": "healthcare-app",
+  "version": "1.0.0",
+  "description": "Full-stack healthcare appointment booking app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "build": "cd frontend && npm install && npm run build && cd ../backend && npm install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
