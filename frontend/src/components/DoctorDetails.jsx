@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import WeeklySchedule from './WeeklySchedule'; // ✅ Import the new component
+import WeeklySchedule from './WeeklySchedule';
 
 const DoctorDetails = ({ doctor }) => {
   if (!doctor) {

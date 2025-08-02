@@ -36,12 +36,12 @@ function saveAppointments(data) {
   fs.writeFileSync(appointmentsFilePath, JSON.stringify(data, null, 2));
 }
 
-// ✅ GET all doctors
+// GET all doctors
 app.get('/api/doctors', (req, res) => {
   res.json(doctors);
 });
 
-// ✅ GET all appointments
+// GET all appointments
 app.get('/api/appointments', (req, res) => {
   try {
     const appointments = readAppointments();
@@ -51,7 +51,7 @@ app.get('/api/appointments', (req, res) => {
   }
 });
 
-// ✅ POST new appointment
+// POST new appointment
 app.post('/api/appointments', (req, res) => {
   const { doctorId, patientName, date, time, reason } = req.body;
 
@@ -79,7 +79,7 @@ app.post('/api/appointments', (req, res) => {
   }
 });
 
-// ✅ DELETE appointment by ID
+// DELETE appointment by ID
 app.delete('/api/appointments/:id', (req, res) => {
   const { id } = req.params;
 
@@ -98,7 +98,7 @@ app.delete('/api/appointments/:id', (req, res) => {
   }
 });
 
-// ✅ PUT update/reschedule appointment
+// PUT update/reschedule appointment
 app.put('/api/appointments/:id', (req, res) => {
   const { id } = req.params;
   const updatedData = req.body;
@@ -119,7 +119,7 @@ app.put('/api/appointments/:id', (req, res) => {
   }
 });
 
-// ✅ Start the server
+// Start the server
 app.listen(PORT, () => {
-  console.log(`🟢 Server running at: http://localhost:${PORT}`);
+  console.log(` Server running at: http://localhost:${PORT}`);
 });

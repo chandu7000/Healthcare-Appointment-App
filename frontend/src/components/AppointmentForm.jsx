@@ -1,4 +1,3 @@
-// src/components/AppointmentForm.jsx
 import React, { useState } from 'react';
 
 const AppointmentForm = ({ doctor, onSubmit }) => {
