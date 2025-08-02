@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import DoctorCard from '../components/DoctorCard'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import DoctorCard from '../components/DoctorCard';
+
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 function HomePage() {
-  const [doctors, setDoctors] = useState([])
+  const [doctors, setDoctors] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/doctors')
-      .then(response => response.json())
-      .then(data => setDoctors(data))
-  }, [])
+    axios.get(`${API_BASE}/api/doctors`)
+      .then(response => setDoctors(response.data))
+      .catch(err => console.error('Error fetching doctors:', err));
+  }, []);
 
   return (
     <div className="p-4">
@@ -19,7 +22,7 @@ function HomePage() {
         ))}
       </div>
     </div>
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;

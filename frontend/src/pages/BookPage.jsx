@@ -1,54 +1,56 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
 function BookPage() {
-  const { doctorId } = useParams()
-  const navigate = useNavigate()
-  const [doctor, setDoctor] = useState(null)
+  const { doctorId } = useParams();
+  const navigate = useNavigate();
+  const [doctor, setDoctor] = useState(null);
   const [formData, setFormData] = useState({
     patientName: '',
     date: '',
     time: '',
     reason: ''
-  })
+  });
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/doctors')
+    fetch(`${API_BASE}/api/doctors`)
       .then(res => res.json())
       .then(data => {
-        const selected = data.find(d => d.id === doctorId)
-        setDoctor(selected)
-      })
-  }, [doctorId])
+        const selected = data.find(d => d.id === doctorId);
+        setDoctor(selected);
+      });
+  }, [doctorId]);
 
   const handleChange = e => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async e => {
-    e.preventDefault()
+    e.preventDefault();
     const appointmentData = {
       ...formData,
       doctorId,
       doctorName: doctor.name,
       specialty: doctor.specialty
-    }
+    };
 
-    const res = await fetch('http://localhost:5000/api/appointments', {
+    const res = await fetch(`${API_BASE}/api/appointments`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(appointmentData)
-    })
+    });
 
     if (res.ok) {
-      alert('Appointment booked successfully!')
-      navigate('/appointments')
+      alert('Appointment booked successfully!');
+      navigate('/appointments');
     } else {
-      alert('Error booking appointment')
+      alert('Error booking appointment');
     }
-  }
+  };
 
-  if (!doctor) return <p className="p-4">Loading doctor info...</p>
+  if (!doctor) return <p className="p-4">Loading doctor info...</p>;
 
   return (
     <div className="max-w-xl mx-auto p-4">
@@ -97,7 +99,7 @@ function BookPage() {
         </button>
       </form>
     </div>
-  )
+  );
 }
 
-export default BookPage
+export default BookPage;
